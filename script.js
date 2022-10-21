@@ -100,14 +100,24 @@ function gameLoop() {
     const playerVictory = checkVictory();
     if (playerVictory === true) {
         gameOver("Player");
+        return;
     }
-    // check tie
+    const tieCheck = checkTie();
+    if (tieCheck === true) {
+        gameOver("Tie");
+        return;
+    }
     computerMove();
     const computerVictory = checkVictory();
     if (computerVictory === true) {
         gameOver("Computer");
+        return;
     }
-    // check tie
+    const secondTieCheck = checkTie();
+    if (secondTieCheck === true) {
+        gameOver("Tie");
+        return;
+    }
 }
 
 
@@ -157,14 +167,34 @@ function checkVictory() {
     }
 }
 
+// function to handle checking if there is a tie
+
+function checkTie() {
+    let totalNumbers = 0;
+    for (let i = 0; i < 8; i++) {
+        if (isNaN(window.gameboard.board[i]) === false) {
+            totalNumbers++;
+        }
+    }
+    if (totalNumbers === 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 // function that handles displaying who one the match and then resetting everything
 
 function gameOver(winner) {
-    if (winner === "player") {
+    if (winner === "Player") {
         gameInfo.textContent = `${window.player.username} Wins!`;
     }
-    else {
+    else if (winner === "Computer") {
         gameInfo.textContent = "Computer Wins!";
+    }
+    else {
+        gameInfo.textContent = "It's a Tie!";
     }
 }
 
