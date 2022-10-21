@@ -1,11 +1,6 @@
-// gameboard objet
-
-const GameboardData = (() => {
-    let board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-    return {
-        board
-    };
-})();
+// gameboard
+    
+let board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
 // player object
 
@@ -72,7 +67,6 @@ function initializeGame() {
     if (playerPosition === 0) {
         computerPosition = 1;
     }
-    window.gameboard = GameboardData;
     window.player = PlayerData(playerName, playerPosition);
     window.computer = ComputerData(computerPosition);
     if (playerPosition === 0) {
@@ -91,12 +85,12 @@ function initializeGame() {
 
 function gameLoop() {
     const playerTile = this.getAttribute("data-key");
-    if (isNaN(window.gameboard.board[playerTile]) === true) {
+    if (isNaN(board[playerTile]) === true) {
         return;
     }
     this.classList.add(window.player.color);
     this.textContent = window.player.letter;
-    window.gameboard.board[playerTile] = window.player.letter;
+    board[playerTile] = window.player.letter;
     const playerVictory = checkVictory();
     if (playerVictory === true) {
         gameOver("Player");
@@ -128,7 +122,7 @@ function computerMove() {
     let selection = undefined;
         while (true) {
             selection = getRandom(9);
-            if (isNaN(window.gameboard.board[selection]) === false) {
+            if (isNaN(board[selection]) === false) {
                 break;
             }
     }
@@ -136,29 +130,29 @@ function computerMove() {
     const selectedTile = document.querySelector(`div[data-key="${selection}"]`);
     selectedTile.classList.add(window.computer.color);
     selectedTile.textContent = window.computer.letter;
-    window.gameboard.board[selection] = window.computer.letter;   
+    board[selection] = window.computer.letter;   
 }
 
 // function that checks for victory
 
 function checkVictory() {
     if (
-        (window.gameboard.board[0] === "X" && window.gameboard.board[1] === "X" && window.gameboard.board[2] === "X") ||
-        (window.gameboard.board[0] === "O" && window.gameboard.board[1] === "O" && window.gameboard.board[2] === "O") ||
-        (window.gameboard.board[3] === "X" && window.gameboard.board[4] === "X" && window.gameboard.board[5] === "X") ||
-        (window.gameboard.board[3] === "O" && window.gameboard.board[4] === "O" && window.gameboard.board[5] === "O") ||
-        (window.gameboard.board[6] === "X" && window.gameboard.board[7] === "X" && window.gameboard.board[8] === "X") ||
-        (window.gameboard.board[6] === "O" && window.gameboard.board[7] === "O" && window.gameboard.board[8] === "O") ||
-        (window.gameboard.board[0] === "X" && window.gameboard.board[3] === "X" && window.gameboard.board[6] === "X") ||
-        (window.gameboard.board[0] === "O" && window.gameboard.board[3] === "O" && window.gameboard.board[6] === "O") ||
-        (window.gameboard.board[1] === "X" && window.gameboard.board[4] === "X" && window.gameboard.board[7] === "X") ||
-        (window.gameboard.board[1] === "O" && window.gameboard.board[4] === "O" && window.gameboard.board[7] === "O") ||
-        (window.gameboard.board[2] === "X" && window.gameboard.board[5] === "X" && window.gameboard.board[8] === "X") ||
-        (window.gameboard.board[2] === "O" && window.gameboard.board[5] === "O" && window.gameboard.board[8] === "O") ||
-        (window.gameboard.board[2] === "X" && window.gameboard.board[4] === "X" && window.gameboard.board[6] === "X") ||
-        (window.gameboard.board[2] === "O" && window.gameboard.board[4] === "O" && window.gameboard.board[6] === "O") ||
-        (window.gameboard.board[0] === "X" && window.gameboard.board[4] === "X" && window.gameboard.board[8] === "X") ||
-        (window.gameboard.board[0] === "O" && window.gameboard.board[4] === "O" && window.gameboard.board[8] === "O")
+        (board[0] === "X" && board[1] === "X" && board[2] === "X") ||
+        (board[0] === "O" && board[1] === "O" && board[2] === "O") ||
+        (board[3] === "X" && board[4] === "X" && board[5] === "X") ||
+        (board[3] === "O" && board[4] === "O" && board[5] === "O") ||
+        (board[6] === "X" && board[7] === "X" && board[8] === "X") ||
+        (board[6] === "O" && board[7] === "O" && board[8] === "O") ||
+        (board[0] === "X" && board[3] === "X" && board[6] === "X") ||
+        (board[0] === "O" && board[3] === "O" && board[6] === "O") ||
+        (board[1] === "X" && board[4] === "X" && board[7] === "X") ||
+        (board[1] === "O" && board[4] === "O" && board[7] === "O") ||
+        (board[2] === "X" && board[5] === "X" && board[8] === "X") ||
+        (board[2] === "O" && board[5] === "O" && board[8] === "O") ||
+        (board[2] === "X" && board[4] === "X" && board[6] === "X") ||
+        (board[2] === "O" && board[4] === "O" && board[6] === "O") ||
+        (board[0] === "X" && board[4] === "X" && board[8] === "X") ||
+        (board[0] === "O" && board[4] === "O" && board[8] === "O")
         ){
             return true;
         } 
@@ -172,7 +166,7 @@ function checkVictory() {
 function checkTie() {
     let totalNumbers = 0;
     for (let i = 0; i < 8; i++) {
-        if (isNaN(window.gameboard.board[i]) === false) {
+        if (isNaN(board[i]) === false) {
             totalNumbers++;
         }
     }
@@ -214,7 +208,7 @@ async function resetGame() {
     gameInfo.classList.add("hidden");
     playGame.textContent = "Play Again!";
     inputArea.classList.remove("hidden");
-    window.gameboard.board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 }
 
 // function handles getting random numbers for assigning who goes first and the computers moves
