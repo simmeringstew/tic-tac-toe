@@ -96,7 +96,6 @@ async function initializeGame() {
 // handles the basic gameloop of the game
 
 function gameLoop() {
-    let victoryCheck = undefined;
     const playerTile = this.getAttribute("data-key");
     if (isNaN(window.gameboard.board[playerTile]) === true) {
         return;
@@ -104,7 +103,7 @@ function gameLoop() {
     this.classList.add(window.player.color);
     this.textContent = window.player.letter;
     window.gameboard.board[playerTile] = window.player.letter;
-    victoryCheck = checkVictory();
+    const playerVictory = checkVictory();
 }
 
 
@@ -127,6 +126,32 @@ function computerMove() {
 }
 
 // function that checks for victory
+
+function checkVictory() {
+    if (
+        (window.gameboard.board[0] === "X" && window.gameboard.board[1] === "X" && window.gameboard.board[2] === "X") ||
+        (window.gameboard.board[0] === "O" && window.gameboard.board[1] === "O" && window.gameboard.board[2] === "O") ||
+        (window.gameboard.board[3] === "X" && window.gameboard.board[4] === "X" && window.gameboard.board[5] === "X") ||
+        (window.gameboard.board[3] === "O" && window.gameboard.board[4] === "O" && window.gameboard.board[5] === "O") ||
+        (window.gameboard.board[6] === "X" && window.gameboard.board[7] === "X" && window.gameboard.board[8] === "X") ||
+        (window.gameboard.board[6] === "O" && window.gameboard.board[7] === "O" && window.gameboard.board[8] === "O") ||
+        (window.gameboard.board[0] === "X" && window.gameboard.board[3] === "X" && window.gameboard.board[6] === "X") ||
+        (window.gameboard.board[0] === "O" && window.gameboard.board[3] === "O" && window.gameboard.board[6] === "O") ||
+        (window.gameboard.board[1] === "X" && window.gameboard.board[4] === "X" && window.gameboard.board[7] === "X") ||
+        (window.gameboard.board[1] === "O" && window.gameboard.board[4] === "O" && window.gameboard.board[7] === "O") ||
+        (window.gameboard.board[2] === "X" && window.gameboard.board[5] === "X" && window.gameboard.board[8] === "X") ||
+        (window.gameboard.board[2] === "O" && window.gameboard.board[5] === "O" && window.gameboard.board[8] === "O") ||
+        (window.gameboard.board[2] === "X" && window.gameboard.board[4] === "X" && window.gameboard.board[6] === "X") ||
+        (window.gameboard.board[2] === "O" && window.gameboard.board[4] === "O" && window.gameboard.board[6] === "O") ||
+        (window.gameboard.board[0] === "X" && window.gameboard.board[4] === "X" && window.gameboard.board[8] === "X") ||
+        (window.gameboard.board[0] === "O" && window.gameboard.board[4] === "O" && window.gameboard.board[8] === "O")
+        ){
+            return true;
+        } 
+    else {
+        return false;
+    }
+}
 
 // function handles getting random numbers for assigning who goes first and the computers moves
 
