@@ -31,7 +31,6 @@ const PlayerData = (inputName, position) => {
 // computer object
 
 const ComputerData = (position) => {
-    const computerName = "Computer";
     let letter = "";
     if (position === 0) {
         letter = "X";
@@ -41,12 +40,9 @@ const ComputerData = (position) => {
         letter = "O"
         color = "purple";
     }
-    const computerTurn = getRandom(9);
     return {
-        computerName,
         letter,
-        color,
-        computerTurn
+        color
     };
 };
 
@@ -62,7 +58,7 @@ playGame.addEventListener("click", initializeGame);
 
 // function that initializes the game
 
-async function initializeGame() {
+function initializeGame() {
     inputArea.classList.add("hidden");
     let playerName = playerNameInput.value;
     if (playerName === "") {
@@ -72,7 +68,7 @@ async function initializeGame() {
         tile.addEventListener("click", gameLoop);
     });
     const playerPosition = getRandom(2);
-    let computerPosition = undefined;
+    let computerPosition = 0;
     if (playerPosition === 0) {
         computerPosition = 1;
     }
@@ -86,8 +82,6 @@ async function initializeGame() {
         gameInfo.textContent = `${window.player.username} is O!`;
     }
     gameInfo.classList.remove("hidden");
-    await sleep(2000);
-    gameInfo.classList.add("hidden");
     if (computerPosition === 0) {
         computerMove();
     }
@@ -104,6 +98,16 @@ function gameLoop() {
     this.textContent = window.player.letter;
     window.gameboard.board[playerTile] = window.player.letter;
     const playerVictory = checkVictory();
+    if (playerVictory === true) {
+        gameOver("Player");
+    }
+    // check tie
+    computerMove();
+    const computerVictory = checkVictory();
+    if (computerVictory === true) {
+        gameOver("Computer");
+    }
+    // check tie
 }
 
 
@@ -112,17 +116,17 @@ function gameLoop() {
 function computerMove() {
 
     let selection = undefined;
-    while (true) {
-        selection = window.computer.computerTurn;
-        if (isNaN(window.gameboard.board[selection]) === false) {
-            break;
-        }
+        while (true) {
+            selection = getRandom(9);
+            if (isNaN(window.gameboard.board[selection]) === false) {
+                break;
+            }
     }
-    console.log(selection);
+
     const selectedTile = document.querySelector(`div[data-key="${selection}"]`);
     selectedTile.classList.add(window.computer.color);
     selectedTile.textContent = window.computer.letter;
-    window.gameboard.board[selection] = window.computer.letter;    
+    window.gameboard.board[selection] = window.computer.letter;   
 }
 
 // function that checks for victory
@@ -153,14 +157,19 @@ function checkVictory() {
     }
 }
 
+// function that handles displaying who one the match and then resetting everything
+
+function gameOver(winner) {
+    if (winner === "player") {
+        gameInfo.textContent = `${window.player.username} Wins!`;
+    }
+    else {
+        gameInfo.textContent = "Computer Wins!";
+    }
+}
+
 // function handles getting random numbers for assigning who goes first and the computers moves
 
 function getRandom(max) {
     return Math.floor(Math.random() * max);
-}
-
-// function to have the program sleep
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }
