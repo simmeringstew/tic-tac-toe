@@ -1,0 +1,17 @@
+/* page setup
+--------------------------------
+*/
+
+:root {
+    font-family: 'Kanit', sans-serif;
+    background-image: linear-gradient(to right bottom, #0f172a, #182134, #202b3f, #2a364a, #334155);
+    background-attachment: fixed;
+    --blue: #0284c7;
+    --green: #22c55e;
+    --purple: #a855f7;
+    --white: #f8fafc;
+}
+
+/* page items
+--------------------------------
+*/
