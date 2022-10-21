@@ -41,11 +41,45 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 8rem;
-    height: 8rem;
+    width: 7rem;
+    height: 7rem;
     font-size: 3rem;
     background-color: #111827;
     color: var(--white);
+}
+
+.game-start {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    gap: 30px;
+}
+
+label {
+    font-size: 1.5rem;
+    color: var(--white);
+}
+
+input {
+    margin-left: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    background-color: var(--white);
+    width: 150px;
+}
+
+input:focus {
+    outline-color: var(--blue);
+}
+
+button {
+    background-color: var(--blue);
+    color: var(--white);
+    border: none;
+    border-radius: 16px;
+    padding: 8px;
 }
 
 /* page items bigger screen
@@ -68,4 +102,16 @@ h1 {
         height: 10rem;
         font-size: 5rem;
     }
+}
+
+/* colors for X or O
+--------------------------------
+*/
+
+.green {
+    color: var(--green);
+}
+
+.purple {
+    color: var(--purple);
 }
