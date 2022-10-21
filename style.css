@@ -15,3 +15,35 @@
 /* page items
 --------------------------------
 */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 3rem;
+    color: var(--white);
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+/* page items bigger screen
+--------------------------------
+*/
+
+@media screen and (min-width: 750px) {
+    .container {
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+}
