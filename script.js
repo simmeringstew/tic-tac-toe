@@ -112,7 +112,8 @@ function computerFirstTurn() {
     const selection = window.computer.computerTurn;
     const selectedTile = document.querySelector(`div[data-key="${selection}"]`);
     selectedTile.textContent = window.computer.letter;
-    selectedTile.classList.add(window.computer.color);    
+    selectedTile.classList.add(window.computer.color);
+    window.gameboard.board[selection] = window.computer.letter;    
 }
 
 // function to have the program sleep
