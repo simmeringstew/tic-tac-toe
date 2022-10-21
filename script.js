@@ -196,10 +196,34 @@ function gameOver(winner) {
     else {
         gameInfo.textContent = "It's a Tie!";
     }
+    resetGame();
+}
+
+// function to reset the game to the initial state
+
+async function resetGame() {
+    tiles.forEach(tile => {
+        tile.removeEventListener("click", gameLoop);
+    });
+    await sleep(2000);
+    tiles.forEach(tile => {
+        tile.textContent = "";
+        tile.classList.remove("green");
+        tile.classList.remove("purple");
+    });
+    gameInfo.classList.add("hidden");
+    playGame.textContent = "Play Again!";
+    inputArea.classList.remove("hidden");
+    window.gameboard.board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 }
 
 // function handles getting random numbers for assigning who goes first and the computers moves
 
 function getRandom(max) {
     return Math.floor(Math.random() * max);
+}
+
+// function to have the program wait
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
