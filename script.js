@@ -49,12 +49,13 @@ const inputArea = document.querySelector(".game-start");
 const playerNameInput = document.querySelector("#name");
 const playGame = document.querySelector(".start");
 const tiles = document.querySelectorAll(".tile");
+const gameInfo = document.querySelector(".game-info");
 
 playGame.addEventListener("click", initializeGame);
 
 // function that initializes the game
 
-function initializeGame() {
+async function initializeGame() {
     inputArea.classList.add("hidden");
     let playerName = playerNameInput.value;
     if (playerName === "") {
@@ -71,6 +72,15 @@ function initializeGame() {
     window.gameboard = GameboardData;
     window.player = PlayerData(playerName, playerPosition);
     window.computer = ComputerData(computerPosition);
+    if (playerPosition === 0) {
+        gameInfo.textContent = `${window.player.username} is X!`;
+    }
+    else {
+        gameInfo.textContent = `${window.player.username} is O!`;
+    }
+    gameInfo.classList.remove("hidden");
+    await sleep(2000);
+    gameInfo.classList.add("hidden");
     if (computerPosition === 0) {
         computerFirstTurn();
     }
@@ -92,5 +102,11 @@ function getRandom(max) {
 // function that allows the computer to make its first move
 
 function computerFirstTurn() {
-    
+
+}
+
+// function to have the program sleep
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
