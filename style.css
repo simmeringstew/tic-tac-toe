@@ -82,6 +82,11 @@ button {
     padding: 8px;
 }
 
+.game-info {
+    color: var(--white);
+    font-size: 2rem;
+}
+
 /* page items bigger screen
 --------------------------------
 */
@@ -121,5 +126,5 @@ button {
 */
 
 .hidden {
-    visibility: hidden;
+    display: none;
 }
