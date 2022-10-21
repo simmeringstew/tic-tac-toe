@@ -12,15 +12,19 @@ const GameboardData = (() => {
 const PlayerData = (inputName, position) => {
     const username = inputName;
     let letter = "";
+    let color = "";
     if (position === 0) {
         letter = "X";
+        color = "green";
     }
     else {
         letter = "O"
+        color = "purple";
     }
     return {
         username,
-        letter
+        letter,
+        color
     };
 };
 
@@ -31,14 +35,17 @@ const ComputerData = (position) => {
     let letter = "";
     if (position === 0) {
         letter = "X";
+        color = "green";
     }
     else {
         letter = "O"
+        color = "purple";
     }
     const computerTurn = getRandom(9);
     return {
         computerName,
         letter,
+        color,
         computerTurn
     };
 };
@@ -102,7 +109,10 @@ function getRandom(max) {
 // function that allows the computer to make its first move
 
 function computerFirstTurn() {
-
+    const selection = window.computer.computerTurn;
+    const selectedTile = document.querySelector(`div[data-key="${selection}"]`);
+    selectedTile.textContent = window.computer.letter;
+    selectedTile.classList.add(window.computer.color);    
 }
 
 // function to have the program sleep
