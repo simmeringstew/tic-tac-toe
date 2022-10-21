@@ -115,3 +115,11 @@ button {
 .purple {
     color: var(--purple);
 }
+
+/* hiding name and play
+--------------------------------
+*/
+
+.hidden {
+    visibility: hidden;
+}
