@@ -4,8 +4,7 @@
 
 :root {
     font-family: 'Kanit', sans-serif;
-    background-image: linear-gradient(to right bottom, #0f172a, #182134, #202b3f, #2a364a, #334155);
-    background-attachment: fixed;
+    background-color: #111827;
     --blue: #0284c7;
     --green: #22c55e;
     --purple: #a855f7;
@@ -32,9 +31,21 @@ h1 {
 .board {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    align-items: center;
+    gap: 4px;
     margin-top: 50px;
     margin-bottom: 50px;
+    background-color: var(--blue);
+}
+
+.tile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 8rem;
+    height: 8rem;
+    font-size: 3rem;
+    background-color: #111827;
+    color: var(--white);
 }
 
 /* page items bigger screen
@@ -42,8 +53,19 @@ h1 {
 */
 
 @media screen and (min-width: 750px) {
+    
     .container {
         margin-top: 40px;
         margin-bottom: 40px;
+    }
+
+    h1 {
+        font-size: 4rem;
+    }
+
+    .tile {
+        width: 10rem;
+        height: 10rem;
+        font-size: 5rem;
     }
 }
